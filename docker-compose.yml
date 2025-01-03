@@ -1,0 +1,22 @@
+version: '3'
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    networks:
+      - cassandra-network
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TestCluster
+      - CASSANDRA_DC=DC1
+      - CASSANDRA_RACK=Rack1
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+networks:
+  cassandra-network:
+    driver: bridge
+
+volumes:
+  cassandra-data:
